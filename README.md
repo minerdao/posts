@@ -1,14 +1,11 @@
 # MinerDAO Posts
-zk-SNARKS、Layer2、隐私方向的技术交流学习，Filecoin、Aleo、zkSync、Secret生态研究。
-
-## zk-SNARKS
-
-## Layer2
+zk-SNARK、Layer2、隐私方向的技术交流学习，Filecoin、Aleo、Phala、zkSync、Secret生态研究。
 
 ## Filecoin
 - [Filecoin封装流程详解](./posts/filecoin/lotus-mining-process.md)
 - [Filecoin最新挖矿硬件推荐配置](./posts/filecoin/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./posts/filecoin/sector-life-cycle.md)
+<!-- - [扇区续期操作说明]() -->
 - [Filecoin节点搭建及启动](./posts/filecoin/daemon-deployment.md)
 - [节点管理，节点常用操作，节点同步常见问题](./posts/filecoin/daemon-operation.md)
 - [钱包管理及使用场景](./posts/filecoin/wallet-management.md)
@@ -21,13 +18,23 @@ zk-SNARKS、Layer2、隐私方向的技术交流学习，Filecoin、Aleo、zkSyn
 - [分布式Miner模块配置和使用](./posts/filecoin/distributed-miner-configuration.md)
 - [如何避免掉算力](./posts/filecoin/miner-keep.md)
 - [Lotus日常运维CheckList](./posts/filecoin/lotus-ops-checklist.md)
+<!-- - [Filecoin虚拟机FVM节点搭建与使用]() -->
 - [常用环境变量说明](./posts/filecoin/environment-usage.md)
 - [自动Pledge脚本使用说明](./posts/filecoin/auto-pledge.md)
-- 常见运维问题定位与解决
-  - [顽固扇区如何删除？](./posts/filecoin/questions.md#1-顽固扇区如何删除)
+- [常见运维问题定位与解决](./posts/filecoin/questions.md#1-顽固扇区如何删除) - 顽固扇区如何删除, Worker掉线如何处理
+
+## Phala
+- [Phala挖矿集群架构详解]
+- [Phala挖矿集群搭建] - Phala Runtime Bridge 2.0搭建流程
+- [Phala集群运维工具Pha-ops使用说明]
+- [常见问题与解决方案]
 
 ## Aleo
 
-## zkSync
-
 ## Secret
+
+## zk-SNARKS
+
+## Layer2
+
+## zkSync
