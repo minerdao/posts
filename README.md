@@ -2,7 +2,12 @@
 MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以DAO(去中心化组织)的形式，聚集开发者和矿工，共同研究、分享挖矿技术。
 
 ## 写作方向
-- 
+- 挖矿项目研究
+- 底层技术分析
+- 矿机评测优化
+- 挖矿软件优化
+- 挖矿集群搭建
+- 运维监控脚本
 
 ## 技术文章
 #### Filecoin
@@ -49,7 +54,7 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
       <img src="https://avatars.githubusercontent.com/u/1715211?v=4" width="60" height="60" style="border-radius: 60px">
       <p>@Max</p>
     </a>
-  </div>
+  </div>                                        
 </div>
 
 
