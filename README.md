@@ -43,13 +43,13 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 <img src="./images/wechat-max.png" width="200">
 
 ## 贡献者
-<ul style="display: flex; padding: 0; list-style: none;">
-  <li style="display: flex; margin-right: 20px;">
+<div style="display: flex; padding: 0; list-style: none;">
+  <div style="display: flex; margin-right: 20px;">
     <a href="https://github.com/yuwenhui" style="text-align: center">
       <img src="https://avatars.githubusercontent.com/u/1715211?v=4" width="60" height="60" style="border-radius: 60px">
       <p>@Max</p>
     </a>
-  </li>
-</ul>
+  </div>
+</div>
 
 
