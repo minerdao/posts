@@ -1,5 +1,8 @@
 # MinerDAO Posts
-MinerDAO挖矿技术交流学习文章汇总。
+MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以DAO(去中心化组织)的形式，聚集开发者和矿工，共同研究、分享挖矿技术。
+
+## 写作方向
+- 
 
 ## 技术文章
 #### Filecoin
@@ -25,7 +28,7 @@ MinerDAO挖矿技术交流学习文章汇总。
 <!-- - [Filecoin虚拟机FVM节点搭建与使用]() -->
 
 #### Aleo
-- Aleo矿池搭建
+- Aleo 矿池搭建
 - Aleo GPU优化
 
 #### Phala
@@ -33,4 +36,20 @@ MinerDAO挖矿技术交流学习文章汇总。
 - Phala挖矿集群搭建 - Phala Runtime Bridge 2.0搭建流程
 - Phala集群运维工具Pha-ops使用说明
 - 常见问题与解决方案
+
+## 加入社群
+欢迎加入MinerDAO挖矿技术社群，微信号: maxmillion-eth (备注: MinerDAO)。
+
+<img src="./images/wechat-max.png" width="200">
+
+## 贡献者
+<ul style="display: flex; padding: 0; list-style: none;">
+  <li style="display: flex; margin-right: 20px;">
+    <a href="https://github.com/yuwenhui" style="text-align: center">
+      <img src="https://avatars.githubusercontent.com/u/1715211?v=4" width="60" height="60" style="border-radius: 60px">
+      <p>@Max</p>
+    </a>
+  </li>
+</ul>
+
 
