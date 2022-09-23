@@ -12,7 +12,7 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 ## 技术文章
 #### Filecoin
 - [Filecoin封装流程详解](./posts/filecoin/lotus-mining-process.md)
-- [Filecoin最新挖矿硬件推荐配置](./posts/filecoin/hardware-configuration.md)
+- [Filecoin挖矿硬件推荐配置](./posts/filecoin/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./posts/filecoin/sector-life-cycle.md)
 - [Filecoin节点搭建及启动](./posts/filecoin/daemon-deployment.md)
 - [节点管理，节点常用操作，节点同步常见问题](./posts/filecoin/daemon-operation.md)
@@ -29,8 +29,9 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - [常用环境变量说明](./posts/filecoin/environment-usage.md)
 - [自动Pledge脚本使用说明](./posts/filecoin/auto-pledge.md)
 - [常见运维问题定位与解决](./posts/filecoin/questions.md#1-顽固扇区如何删除) - 顽固扇区如何删除, Worker掉线如何处理
-<!-- - [扇区续期操作说明]() -->
-<!-- - [Filecoin虚拟机FVM节点搭建与使用]() -->
+- 扇区到期如何续期
+- Snap deal操作详解
+- FVM合约开发及部署
 
 #### Aleo
 - Aleo 矿池搭建
