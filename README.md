@@ -29,19 +29,14 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - [常用环境变量说明](./posts/filecoin/environment-usage.md)
 - [自动Pledge脚本使用说明](./posts/filecoin/auto-pledge.md)
 - [常见运维问题定位与解决](./posts/filecoin/questions.md#1-顽固扇区如何删除) - 顽固扇区如何删除, Worker掉线如何处理
-- 扇区到期如何续期
-- Snap deal操作详解
-- FVM合约开发及部署
+- Snap deal操作详解 [TODO]
+- Filecoin Datacap申请 - Datacap如何申请、如何使用 [TODO]
+- Filecoin 订单市场操作详解 - 分离订单市场、离线订单 [TODO]
+- FVM合约开发及部署 [TODO]
 
 #### Aleo
-- Aleo 矿池搭建
-- Aleo GPU优化
-
-#### Phala
-- Phala挖矿集群架构详解
-- Phala挖矿集群搭建 - Phala Runtime Bridge 2.0搭建流程
-- Phala集群运维工具Pha-ops使用说明
-- 常见问题与解决方案
+- Aleo 矿池搭建 [TODO]
+- Aleo GPU优化 [TODO]
 
 ## 加入社群
 欢迎加入MinerDAO挖矿技术社群，微信号: maxmillion-eth (备注: MinerDAO)。
@@ -57,5 +52,3 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
     </a>
   </div>                                        
 </div>
-
-
