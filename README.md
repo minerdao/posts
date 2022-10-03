@@ -35,8 +35,10 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - FVM合约开发及部署 [TODO]
 
 #### Aleo
-- Aleo 矿池搭建 [TODO]
-- Aleo GPU优化 [TODO]
+- Aleo挖矿流程详解
+- Aleo显卡性能测试
+- Aleo矿池搭建 [TODO]
+- AleoGPU优化 [TODO]
 
 ## 加入社群
 欢迎加入MinerDAO挖矿技术社群，微信号: maxmillion-eth (备注: MinerDAO)。
