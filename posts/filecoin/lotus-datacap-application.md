@@ -37,16 +37,17 @@ https://github.com/filecoin-project/filecoin-plus-large-datasets
 #### 1.4 DataCap 分配规则
 [Datacap的分配规则🔗](https://github.com/filecoin-project/filecoin-plus-large-datasets#datacap-allocation-calculations)参考官方的说明。
 如果每周需求的额度为100TB，则按如下规则分配：
-第一次分配：100TB
-第二次分配：200TB
-第三次分配：400TB
-第四次分配：800TB
+
+第一次分配：100TB  
+第二次分配：200TB  
+第三次分配：400TB  
+第四次分配：800TB  
 第五次以后的分配：800TB。
 
 当客户使用超过前一轮 DataCap 75%的额度时，将自动启动下一次 DataCap 的审批流程。
 
-公证人可以访问所需的链上数据，以验证客户是否按照程序的原则，并符合原始申请中概述的分配策略。
-2名公证人需要批准下一批 DataCap 分配给客户。
+公证人可以访问所需的链上数据，以验证客户是否按照程序的原则，并符合原始申请中概述的分配策略。  
+2名公证人需要批准下一批 DataCap 分配给客户。  
 同一公证人不能立即签署随后的 DataCap 分配，即你至少需要4名公证人来持续支持您的申请，以接收多批 DataCap。
 
 #### 1.5 注意的几个问题
