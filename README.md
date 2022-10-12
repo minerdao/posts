@@ -29,8 +29,8 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - [常用环境变量说明](./posts/filecoin/environment-usage.md)
 - [自动Pledge脚本使用说明](./posts/filecoin/auto-pledge.md)
 - [常见运维问题定位与解决](./posts/filecoin/questions.md#1-顽固扇区如何删除) - 顽固扇区如何删除, Worker掉线如何处理
+- [Filecoin Datacap申请](./posts/filecoin/lotus-datacap-application.md) - Datacap如何申请及注意事项
 - Snap deal操作详解 [TODO]
-- Filecoin Datacap申请 - Datacap如何申请、如何使用 [TODO]
 - Filecoin 订单市场操作详解 - 分离订单市场、离线订单 [TODO]
 - FVM合约开发及部署 [TODO]
 
