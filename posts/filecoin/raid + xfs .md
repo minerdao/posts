@@ -29,7 +29,7 @@ sudo update-initramfs -u
 ```
 sudo blkid 
 sudo vim /etc/fstab
-/dev/disk/by-uuid/d81f7ffb-7b34-4305-8f3a-d2781f365a64 /home/fil/disk_md0 xfs defaults 0 0
+/dev/disk/by-uuid/360e7d28-1e02-42fc-9fb7-e0ff66735c6d /home/fil/disk_md0 xfs defaults 0 0
 sudo mount -a
 ```
 

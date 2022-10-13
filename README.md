@@ -41,9 +41,13 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - AleoGPU优化 [TODO]
 
 ## 加入社群
-欢迎加入MinerDAO挖矿技术社群，微信号: maxmillion-eth (备注: MinerDAO)。
+MinerDAO社区聚集了Filecoin, Aleo, IronFish等当前热门挖矿项目的矿工、开发者、投资人。  
+我们为矿工和开发者提供技术交流、算法优化、资源合作、新项目研究等，欢迎大家加入讨论。
 
-<img src="./images/wechat-max.png" width="200">
+- 微信号: maxmillion-eth (备注: MinerDAO)
+  <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png" width="200">
+- [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
+- [Discord交流群](https://discord.gg/4f3DjmDk7j)
 
 ## 贡献者
 <div style="display: flex; padding: 0; list-style: none;">
