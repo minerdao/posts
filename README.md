@@ -50,13 +50,3 @@ MinerDAO社区聚集了Filecoin, Aleo, IronFish等当前热门挖矿项目的矿
 
 - [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
 - [Discord交流群](https://discord.gg/4f3DjmDk7j)
-
-## 贡献者
-<div style="display: flex; padding: 0; list-style: none;">
-  <div style="display: flex; margin-right: 20px;">
-    <a href="https://github.com/yuwenhui" style="text-align: center">
-      <img src="https://avatars.githubusercontent.com/u/1715211?v=4" width="60" height="60" style="border-radius: 60px">
-      <p>@Max</p>
-    </a>
-  </div>                                        
-</div>
