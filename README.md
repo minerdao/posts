@@ -44,7 +44,7 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 MinerDAO社区聚集了Filecoin, Aleo, IronFish等当前热门挖矿项目的矿工、开发者、投资人。  
 我们为矿工和开发者提供技术交流、算法优化、资源合作、新项目研究等，欢迎大家加入讨论。
 
-- 微信号: maxmillion-eth (备注: MinerDAO)
+- 微信号: maxmillion-eth (备注: MinerDAO)  
 
   <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png" width="200">
 
