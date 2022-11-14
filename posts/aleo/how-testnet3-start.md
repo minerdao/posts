@@ -57,6 +57,9 @@ cd snarkOS
 # 编译
 cargo install --path .
 
+# 如果遇到target权限不够，或者依赖库未安装的情况，可以运行以下命令编译:
+sudo ./build_ubuntu.sh
+
 # 创建钱包
 ./target/release/snarkos account new
 
