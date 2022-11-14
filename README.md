@@ -35,7 +35,7 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - FVM合约开发及部署 [TODO]
 
 #### Aleo
-- Aleo挖矿流程详解
+- [Aleo Testnet3如何参与](./posts/aleo/how-testnet3-start.md) - Aleo Testnet3 2阶段参与的一些说明
 - Aleo显卡性能测试
 - Aleo矿池搭建 [TODO]
 - AleoGPU优化 [TODO]
