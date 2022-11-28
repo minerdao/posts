@@ -27,9 +27,9 @@ sudo update-initramfs -u
 
 ## 4.挂载硬盘
 ```
-sudo blkid 
+sudo blkid
 sudo vim /etc/fstab
-/dev/disk/by-uuid/360e7d28-1e02-42fc-9fb7-e0ff66735c6d /home/fil/disk_md0 xfs defaults 0 0
+/dev/disk/by-uuid/e6d668c1-279d-460b-a712-19cd456f845b /home/cs/md0 xfs defaults 0 0
 sudo mount -a
 ```
 

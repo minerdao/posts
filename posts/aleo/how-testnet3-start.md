@@ -66,4 +66,14 @@ sudo ./build_ubuntu.sh
 # 启动Prover，输入上面创建地址的私钥
 ./run-prover.sh
 ```
+#### 2.4 如何启用GPU?
+修改`snarkOS/Cargo.toml/`里面的`[workspace.dependencies.snarkvm]`,
 
+将
+```toml
+features = ["circuit", "console", "parallel"]
+```
+改为
+```toml
+features = ["circuit", "console", "parallel", "cuda"]
+```
