@@ -204,6 +204,6 @@ MinerDAO社区聚集了Filecoin, Aleo, Spacemesh等当前热门挖矿项目的�
 
 - 微信号: maxvint (备注: MinerDAO)  
 
-  <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png" width="200">
+  <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png?20230727" width="200">
 
 - [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
