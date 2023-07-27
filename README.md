@@ -10,6 +10,9 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - 运维监控脚本
 
 ## 技术文章
+#### Spacemesh
+- [SpaceMesh 集群P盘教程](./posts/spacemesh/cluster-mining-tutorial.md) - 如何使用postcli搭建集群P盘的详细教程
+
 #### Filecoin
 - [Filecoin封装流程详解](./posts/filecoin/lotus-mining-process.md)
 - [Filecoin挖矿硬件推荐配置](./posts/filecoin/hardware-configuration.md)
@@ -33,9 +36,6 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - [Snap Deals操作详解](./posts/filecoin/snap-deals.md) - Snap Deals操作流程及遇到的问题
 - Filecoin 订单市场操作详解 - 分离订单市场、离线订单 [TODO]
 - FVM合约开发及部署 [TODO]
-
-#### Spacemesh
-- [SpaceMesh 集群P盘教程](./posts/spacemesh/cluster-mining-tutorial.md) - 如何使用postcli搭建集群P盘的详细教程
 
 ## 加入社群
 MinerDAO社区聚集了Filecoin, Aleo, Spacemesh等当前热门挖矿项目的矿工、开发者、投资人。  
