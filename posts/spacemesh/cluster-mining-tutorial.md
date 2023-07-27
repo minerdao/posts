@@ -164,7 +164,7 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 2023-07-23T16:07:27.736+0800	INFO	fb26a.atxBuilder	building new atx challenge
 ```
 
-## 常用命令
+## 3 常用命令
 - 计算P盘文件数
 ```shell
 ./postcli -numUnits 5 -printNumFiles
@@ -181,10 +181,10 @@ cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32
 ```
 持续更新中...
 
-## 常见问题
+## 4 常见问题
 待更新...
 
-## 相关资源链接
+## 5 相关资源链接
 - [go-spacemesh](https://github.com/spacemeshos/go-spacemesh)
 - [post-cli](https://github.com/spacemeshos/post/blob/develop/cmd/postcli/README.md)
 - [post-rs](https://github.com/spacemeshos/post-rs.git)
@@ -197,3 +197,13 @@ cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32
 - [多线程P盘脚本](https://github.com/fourierism/post)
 - [奖励及发放](https://spacemesh.io/start/)
 - [奖励释放测算](https://docs.google.com/spreadsheets/d/1apyWCnf5wXzFik4BGvNckLi8lCAkRSbgsaWJoY_qCng/edit#gid=0)
+
+## 6 加入社群
+MinerDAO社区聚集了Filecoin, Aleo, Spacemesh等当前热门挖矿项目的矿工、开发者、投资人。  
+我们为矿工和开发者提供技术交流、算法优化、资源合作、新项目研究等，欢迎大家加入讨论。
+
+- 微信号: maxvint (备注: MinerDAO)  
+
+  <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png" width="200">
+
+- [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
