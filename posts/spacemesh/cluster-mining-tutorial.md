@@ -1,4 +1,4 @@
-# SpaceMesh 集群P盘教程
+# Spacemesh 集群P盘教程
 
 本教程基于`Ubuntu22.04`，`go1.20 linux/amd64`，目前仅支持Ubuntu环境。
 
