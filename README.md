@@ -11,7 +11,7 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 
 ## 技术文章
 #### Spacemesh
-- [SpaceMesh 集群P盘教程](./spacemesh/cluster-mining-tutorial.md) - 如何使用postcli搭建集群P盘的详细教程
+- [Spacemesh 集群P盘教程](./spacemesh/cluster-mining-tutorial.md) - 如何使用postcli搭建集群P盘
 
 #### Filecoin
 - [Filecoin封装流程详解](./filecoin/lotus-mining-process.md)
