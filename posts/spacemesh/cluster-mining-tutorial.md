@@ -4,7 +4,7 @@
 
 ## 1 编译代码
 #### 1.1 编译准备
-```sh
+```shell
 sudo apt update && sudo apt install -y git git-lfs make curl build-essential unzip wget ocl-icd-opencl-dev unzip libudev-dev
 ```
 注意go版本需要大于1.19。
@@ -13,7 +13,7 @@ sudo apt update && sudo apt install -y git git-lfs make curl build-essential unz
 首先编译显卡P盘脚本[postcli](https://github.com/spacemeshos/post/tree/develop/cmd/postcli)。
 注意要根据最新的tag拉取代码，`git clone`默认分支的不一定是稳定版本的代码。
 例如：拉取tag为`v0.8.9`的代码。
-```sh
+```shell
 git clone https://github.com/spacemeshos/post.git && cd post
 git reset --hard v0.8.9
 make postcli
@@ -21,7 +21,7 @@ make postcli
 编译好的二进制文件位于`post/build`目录下。
 
 #### 1.3 编译扫盘/节点程序 - go-spacemesh
-```sh
+```shell
 git clone https://github.com/spacemeshos/go-spacemesh.git && cd go-spacemesh
 git reset --hard v1.0.6
 make build
@@ -29,7 +29,7 @@ make build
 编译好的二进制文件位于`go-spacemesh/build`目录下。
 
 #### 1.4 编译钱包命令行 - smcli
-```sh
+```shell
 git clone https://github.com/spacemeshos/smcli.git && cd smcli
 git reset --hard v1.0.10
 make build
@@ -41,19 +41,19 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 
 #### 2.1 创建钱包
 使用上面编译好的smcli来创建钱包，注意要备份好助记词和钱包密码。
-```sh
+```shell
 ./smcli wallet create
 ```
 钱包创建完毕后，会输出到一个`/path/to/wallet_2023-07-21T07-17-52.946Z.json`文件中。
 
 下一步执行导入钱包，并输入创建时的密码，就能看到钱包地址（格式为：sm1xxxxxxxxx）。
-```sh
+```shell
 ./smcli wallet read /path/to/wallet_2023-07-21T07-17-52.946Z.json
 ```
 
 #### 2.2 初始化
 先用编译好的`go-spacemesh`初始化：
-```sh
+```shell
 ./go-spacemesh --config config.mainnet.json --smeshing-coinbase sm1xxxxxxx --smeshing-opts-numunits 5 --smeshing-opts-datadir /mnt/spacemesh/post_data --data-folder ~/md0/spacemesh/node_data
 ```
 该命令会启动一个Spacemesh节点，并同时启动P盘，参数说明：
@@ -64,7 +64,9 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 - `--data-folder`: 节点文件存储路径；
 
 本文主要介绍多台机器如何搭建集群P盘，如果要多台机器同时P盘(基于同一个节点)，启动上面的初始化命令等开始生成`.bin`文件后，就可以退出了。
+
 因为我们要使用postcli来多台机器同时P盘，`go-spacemesh`只负责同步区块节点、扫盘及提交证明。
+
 如果退出时，`--smeshing-opts-datadir`目录下已经生成了`postdata_0.bin`文件，建议删除。
 
 初始化以后，将在`--smeshing-opts-datadir`生成2个文件：
@@ -75,56 +77,61 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 SpaceMesh是以`numUnits`为基本的存储单元，每个`numUnits = 64GB`，P好的文件是`postdata_xxx.bin`格式的文件，文件大小取决于postcli启动时`-maxFileSize`参数指定的文件大小，默认是4G。
 
 通过postcli的 `-printNumFiles` 来计算最终生成多少bin文件。
-```sh
+```shell
 ./postcli -numUnits 5 -printNumFiles
 80
 ```
 输出结果为80，即共生成80个.bin文件，每个文件大小为4G，共320G。
 
 如果要指定P盘文件大小，则需增加`-maxFileSize`参数，如P 8GB的文件，输出结果为40：
-```sh
+```shell
 ./postcli -numUnits 5 -maxFileSize=8589934592 -printNumFiles
 40
 ```
 
 #### 2.4 计算分段索引
 针对多台机器基于同一个NodeID P盘的情况，postcli提供了分段P盘`subset`功能，更多信息也可参照[postcli subset文档](https://github.com/spacemeshos/post/tree/develop/cmd/postcli#initializing-a-subset-of-post-data)。
+
 Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile`，`-toFile`来设置开始及结束的文件索引。
+
 例如，上面的`-numUnits=5`总共需要生成40个.bin文件，如果平均分配到4台机器上，则每台机器的启动命令分别为：
+
 - 机器1 (0 - 19)
-```sh
+```shell
 ./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=0 -toFile=19 -datadir=/mnt/spacemesh/data
 ```
 
 - 机器2 (20 - 39)
-```sh
+```shell
 ./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=20 -toFile=39 -datadir=/mnt/spacemesh/data
 ```
 
 - 机器3 (40 - 59)
-```sh
+```shell
 ./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=40 -toFile=59 -datadir=/mnt/spacemesh/data
 ```
 
 - 机器4 (60 - 79)
-```sh
+```shell
 ./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=60 -toFile=79 -datadir=/mnt/spacemesh/data
 ```
 
 #### 2.5 启动P盘
 根据计算好的分段索引，在subset的每台机器上，按照分段索引启动，启动参数说明：
 - `-provider` 指定P盘的显卡ID，0、1、2，默认为0；
-- `-commitmentAtxId` 提交PoET证明的地址，通过以下命令获取：
+- `-commitmentAtxId` 提交PoET证明的地址，通过以下命令获取：  
   `cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32`
-- `-id` 节点ID(NodeID)，通过以下命令获取：
+
+- `-id` 节点ID(NodeID)，通过以下命令获取：  
   `cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32`
+
 - `-numUnits` P盘文件单元数，和节点初始化时候的`--smeshing-opts-numunits`保持一致；
 - `-datadir` P盘完成后的文件保存目录。
 
 #### 2.6 合并P盘文件
 等所有subset的机器P盘完成后，需要将每台机器上生成的文件，合并到运行`go-spacemesh`服务机器的`--smeshing-opts-datadir`路径下，然后重新启动`go-spacemesh`就可以开始扫盘并生成证明了。如果文件完整，就会输出类似下面的日志：
 
-```sh
+```shell
 2023-07-23T15:57:24.849+0800	INFO	fb26a.post	initialization: file already initialized	{"node_id": "fb26a9d2da5626ded24027da14054bf0fbf8886bd7ec4a29d05ee2fdd44edddd", "module": "post", "fileIndex": 0, "currentNumLabels": 268435456, "targetNumLabels": 268435456, "startPosition": 0}
 2023-07-23T15:57:24.849+0800	INFO	fb26a.post	initialization: file already initialized	{"node_id": "fb26a9d2da5626ded24027da14054bf0fbf8886bd7ec4a29d05ee2fdd44edddd", "module": "post", "fileIndex": 1, "currentNumLabels": 268435456, "targetNumLabels": 268435456, "startPosition": 268435456}
 ...
@@ -132,7 +139,7 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 
 #### 2.7 扫盘及提交证明
 文件扫描完毕后，开始读取文件并生成证明，生成证明开始的日志类似：
-```sh
+```shell
 2023-07-23T15:57:59.995+0800	INFO	fb26a.post calculating proof of work for nonces 0..144
 ```
 
@@ -140,34 +147,36 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 `iostat -dmt /dev/md0 5`
 
 据我个人的测试观察，整个扫盘并生成证明的过程，在刚开始会有10-20分钟的准备时间(20T数据)，然后开始有磁盘I/O。
+
 可以根据自己的磁盘速率，估算扫盘及生成证明的时间。
+
 比如磁盘读写为2G/s，那么20T数据的扫盘+证明时间大致为：`(20 * 1024) / 2 /3600`约为2.8小时，加上准备时间，大约为3个小时。
 
 扫盘完成后，会输出类似下面的日志：
-```sh
+```shell
 2023-07-23T16:07:27.469+0800	INFO	fb26a.post	Found proof for nonce: 110, pow: 54043195528453627 with...
 ```
 
 下来是生成证明及初始化过程，完成后将在`--smeshing-opts-datadir`目录下生成`post.bin`文件。
 
 等停留在下面内容时，就表明整个过程已完成，耐心等待注册即可。
-```sh
+```shell
 2023-07-23T16:07:27.736+0800	INFO	fb26a.atxBuilder	building new atx challenge
 ```
 
 ## 常用命令
 - 计算P盘文件数
-```sh
+```shell
 ./postcli -numUnits 5 -printNumFiles
 ```
 
 - Get commitmentAtxId
-```sh
+```shell
 cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32
 ```
 
 - Get NodeId
-```sh
+```shell
 cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32
 ```
 持续更新中...
