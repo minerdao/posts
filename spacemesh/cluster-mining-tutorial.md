@@ -71,13 +71,13 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 - `--smeshing-opts-datadir`: P盘文件存储路径；
 - `--data-folder`: 节点文件存储路径；
 
-本文主要介绍多台机器如何搭建集群P盘，如果要多台机器同时P盘(基于同一个节点)，启动上面的初始化命令等开始生成`.bin`文件后，就可以退出了。
+本文主要介绍多台机器如何搭建集群P盘，如果只有一台机器(即单机solo模式)，上面的命令运行以后，就不用管了，等待P盘完成即可。
 
-因为我们要使用postcli来多台机器同时P盘，`go-spacemesh`只负责同步区块节点、扫盘及提交证明。
+如果要多台机器在同一个节点上同时P盘，启动上面的初始化命令等开始生成`.bin`文件后，就可以先退出了。因为我们要使用postcli来多台机器同时P盘，`go-spacemesh`只负责同步区块节点、扫盘及提交证明。
 
 如果退出时，`--smeshing-opts-datadir`目录下已经生成了`postdata_0.bin`文件，建议删除。
 
-初始化以后，将在`--smeshing-opts-datadir`生成2个文件：
+初始化完成后，将在`--smeshing-opts-datadir`生成2个文件：
 - `key.bin`: 节点私钥文件，其中保存了初始化以后的节点私钥；
 - `postdata_metadata.json`: 节点元数据文件，其中包含了`NodeId`和`CommitmentAtxId`，这2个值都是下来P盘需要用到的。
 
