@@ -34,19 +34,15 @@ MinerDAO是面向中文社区的挖矿技术交流学习组织，我们尝试以
 - Filecoin 订单市场操作详解 - 分离订单市场、离线订单 [TODO]
 - FVM合约开发及部署 [TODO]
 
-#### Aleo
-- [Aleo Testnet3如何参与](./posts/aleo/how-testnet3-start.md) - Aleo Testnet3 2阶段参与的一些说明
-- Aleo显卡性能测试
-- Aleo矿池搭建 [TODO]
-- AleoGPU优化 [TODO]
+#### Spacemesh
+- [SpaceMesh 集群P盘教程](./posts/spacemesh/cluster-mining-tutorial.md) - 如何使用postcli搭建集群P盘的详细教程
 
 ## 加入社群
-MinerDAO社区聚集了Filecoin, Aleo, IronFish等当前热门挖矿项目的矿工、开发者、投资人。  
+MinerDAO社区聚集了Filecoin, Aleo, Spacemesh等当前热门挖矿项目的矿工、开发者、投资人。  
 我们为矿工和开发者提供技术交流、算法优化、资源合作、新项目研究等，欢迎大家加入讨论。
 
-- 微信号: maxmillion-eth (备注: MinerDAO)  
+- 微信号: maxvint (备注: MinerDAO)  
 
   <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png" width="200">
 
 - [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
-- [Discord交流群](https://discord.gg/4f3DjmDk7j)

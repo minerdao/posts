@@ -20,7 +20,7 @@ sudo mkfs.xfs -f -d agcount=128,su=128k,sw=5 -r extsize=640k  /dev/md0
 ```
 sudo mdadm --detail /dev/md0
 sudo vim /etc/mdadm/mdadm.conf
-ARRAY /dev/md0 UUID=1969c7b5:1279e1a1:01f60921:4ed029cd
+ARRAY /dev/md0 UUID=7f1dbda8:90550745:c70bbe0f:0ea5f37e
 保存退出
 sudo update-initramfs -u
 ```
@@ -29,7 +29,7 @@ sudo update-initramfs -u
 ```
 sudo blkid
 sudo vim /etc/fstab
-/dev/disk/by-uuid/e6d668c1-279d-460b-a712-19cd456f845b /home/cs/md0 xfs defaults 0 0
+/dev/disk/by-uuid/fcf9ca63-831d-4190-a465-7e2082658d94 /home/cs/md0 xfs defaults 0 0
 sudo mount -a
 ```
 
