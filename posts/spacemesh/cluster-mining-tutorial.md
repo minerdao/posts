@@ -3,13 +3,13 @@
 本教程基于`Ubuntu22.04`，`go1.20 linux/amd64`，目前仅支持Ubuntu环境。
 
 ## 1 编译代码
-#### 1.1 编译准备
+### 1.1 编译准备
 ```shell
 sudo apt update && sudo apt install -y git git-lfs make curl build-essential unzip wget ocl-icd-opencl-dev unzip libudev-dev
 ```
 注意go版本需要大于1.19。
 
-#### 1.2 编译显卡P盘程序 - postcli
+### 1.2 编译显卡P盘程序 - postcli
 首先编译显卡P盘脚本[postcli](https://github.com/spacemeshos/post/tree/develop/cmd/postcli)。
 注意要根据最新的tag拉取代码，`git clone`默认分支的不一定是稳定版本的代码。
 例如：拉取tag为`v0.8.9`的代码。
@@ -20,7 +20,7 @@ make postcli
 ```
 编译好的二进制文件位于`post/build`目录下。
 
-#### 1.3 编译扫盘/节点程序 - go-spacemesh
+### 1.3 编译扫盘/节点程序 - go-spacemesh
 ```shell
 git clone https://github.com/spacemeshos/go-spacemesh.git && cd go-spacemesh
 git reset --hard v1.0.6
@@ -28,7 +28,7 @@ make build
 ```
 编译好的二进制文件位于`go-spacemesh/build`目录下。
 
-#### 1.4 编译钱包命令行 - smcli
+### 1.4 编译钱包命令行 - smcli
 ```shell
 git clone https://github.com/spacemeshos/smcli.git && cd smcli
 git reset --hard v1.0.10
@@ -39,7 +39,7 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 ## 2 集群P盘流程
 这里主要分享多机器集群P盘的详细操作。简单来说，先初始化，然后用postcli算好需要P盘的文件数，然后计算index，再分配到集群的多台机器开始P盘，最终全部P完后，再合并到一起，然后由`go-spacemesh`来扫盘并生成证明。
 
-#### 2.1 创建钱包
+### 2.1 创建钱包
 使用上面编译好的smcli来创建钱包，注意要备份好助记词和钱包密码。
 ```shell
 ./smcli wallet create
@@ -51,7 +51,7 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 ./smcli wallet read /path/to/wallet_2023-07-21T07-17-52.946Z.json
 ```
 
-#### 2.2 初始化
+### 2.2 初始化
 先用编译好的`go-spacemesh`初始化：
 ```shell
 ./go-spacemesh --config config.mainnet.json --smeshing-coinbase sm1xxxxxxx --smeshing-opts-numunits 5 --smeshing-opts-datadir /mnt/spacemesh/post_data --data-folder ~/md0/spacemesh/node_data
@@ -73,7 +73,7 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 - `key.bin`: 节点私钥文件，其中保存了初始化以后的节点私钥；
 - `postdata_metadata.json`: 节点元数据文件，其中包含了`NodeId`和`CommitmentAtxId`，这2个值都是下来P盘需要用到的。
 
-#### 2.3 计算P盘文件数
+### 2.3 计算P盘文件数
 SpaceMesh是以`numUnits`为基本的存储单元，每个`numUnits = 64GB`，P好的文件是`postdata_xxx.bin`格式的文件，文件大小取决于postcli启动时`-maxFileSize`参数指定的文件大小，默认是4G。
 
 通过postcli的 `-printNumFiles` 来计算最终生成多少bin文件。
@@ -89,7 +89,7 @@ SpaceMesh是以`numUnits`为基本的存储单元，每个`numUnits = 64GB`，P�
 40
 ```
 
-#### 2.4 计算分段索引
+### 2.4 计算分段索引
 针对多台机器基于同一个NodeID P盘的情况，postcli提供了分段P盘`subset`功能，更多信息也可参照[postcli subset文档](https://github.com/spacemeshos/post/tree/develop/cmd/postcli#initializing-a-subset-of-post-data)。
 
 Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile`，`-toFile`来设置开始及结束的文件索引。
@@ -116,7 +116,7 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 ./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=60 -toFile=79 -datadir=/mnt/spacemesh/data
 ```
 
-#### 2.5 启动P盘
+### 2.5 启动P盘
 根据计算好的分段索引，在subset的每台机器上，按照分段索引启动，启动参数说明：
 - `-provider` 指定P盘的显卡ID，0、1、2，默认为0；
 - `-commitmentAtxId` 提交PoET证明的地址，通过以下命令获取：  
@@ -128,7 +128,7 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 - `-numUnits` P盘文件单元数，和节点初始化时候的`--smeshing-opts-numunits`保持一致；
 - `-datadir` P盘完成后的文件保存目录。
 
-#### 2.6 合并P盘文件
+### 2.6 合并P盘文件
 等所有subset的机器P盘完成后，需要将每台机器上生成的文件，合并到运行`go-spacemesh`服务机器的`--smeshing-opts-datadir`路径下，然后重新启动`go-spacemesh`就可以开始扫盘并生成证明了。如果文件完整，就会输出类似下面的日志：
 
 ```shell
@@ -137,7 +137,7 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 ...
 ```
 
-#### 2.7 扫盘及提交证明
+### 2.7 扫盘及提交证明
 文件扫描完毕后，开始读取文件并生成证明，生成证明开始的日志类似：
 ```shell
 2023-07-23T15:57:59.995+0800	INFO	fb26a.post calculating proof of work for nonces 0..144
