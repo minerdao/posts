@@ -48,6 +48,8 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 - 重新启动go-spacemesh，开始扫盘并生成证明。
 
 ### 2.1 创建钱包
+如果已经有钱包地址，比如通过smapp创建的钱包，可跳过本节，直接开始2.2初始化。
+
 使用上面编译好的smcli来创建钱包，注意要备份好助记词和钱包密码。
 ```sh
 ./smcli wallet create
@@ -210,21 +212,40 @@ grpcurl -plaintext localhost:9092 spacemesh.v1.NodeService.Status
 持续更新中...
 
 ## 4 常见问题
-待更新...
 
-## 5 相关资源链接
+### 4.1 P盘速度怎样的？
+在NVMe U.2 * 5 raid0上的显卡的P盘速度:
+
+显卡       | 文件大小 | 用时
+-----------|-------:|------:
+RTX 3090   | 4G | 19分钟
+RTX 3080   | 4G | 23分钟
+RTX 2080Ti | 4G | 32分钟
+
+欢迎大家持续补充其他显卡的速度。
+
+### 4.2 多个Node能用一个`--smeshing-coinbase`钱包地址吗？
+可以的，只要是有效的钱包地址都可以。
+
+### 4.3 用postcli已经P好的文件，可以移走吗？
+不要移走，会影响nonce的寻找，等一批跑完后方可移走。
+
+持续更新中...
+
+## 5 资源链接
 - [go-spacemesh](https://github.com/spacemeshos/go-spacemesh)
 - [post-cli](https://github.com/spacemeshos/post/blob/develop/cmd/postcli/README.md)
 - [post-rs](https://github.com/spacemeshos/post-rs.git)
 - [gpu post](https://github.com/spacemeshos/gpu-post)
+- [区块浏览器](https://explorer.spacemesh.io/overview)
 - [钱包命令行工具](https://github.com/spacemeshos/smcli)
 - [经济模型](https://spacemesh.io/blog/spacemesh-economics-intro)
+- [奖励及发放](https://spacemesh.io/start/)
+- [奖励释放测算](https://docs.google.com/spreadsheets/d/1apyWCnf5wXzFik4BGvNckLi8lCAkRSbgsaWJoY_qCng/edit#gid=0)
 - [创世时间线](https://spacemesh.io/blog/genesis-timeline/)
 - [显卡P盘脚本](https://github.com/spacemeshos/post/tree/develop/cmd/postcli)
 - [多显卡P盘教程](https://simeononsecurity.ch/other/efficient-spacemesh-mining-multiple-gpus-guide/#linux)
 - [多线程P盘脚本](https://github.com/fourierism/post)
-- [奖励及发放](https://spacemesh.io/start/)
-- [奖励释放测算](https://docs.google.com/spreadsheets/d/1apyWCnf5wXzFik4BGvNckLi8lCAkRSbgsaWJoY_qCng/edit#gid=0)
 
 ## 6 加入社群
 MinerDAO社区聚集了Filecoin, Aleo, Spacemesh等当前热门挖矿项目的矿工、开发者、投资人。  
