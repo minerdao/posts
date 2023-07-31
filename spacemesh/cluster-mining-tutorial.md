@@ -64,16 +64,18 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 ### 2.2 初始化
 先用编译好的`go-spacemesh`初始化：
 ```sh
-./go-spacemesh --config config.mainnet.json --smeshing-coinbase sm1xxxxxxx --smeshing-opts-numunits 5 --smeshing-opts-datadir /mnt/spacemesh/post_data --data-folder /mnt/spacemesh/node_data
+./go-spacemesh --config config.mainnet.json --smeshing-start --smeshing-coinbase sm1xxxxxxx --smeshing-opts-numunits 5 --smeshing-opts-provider 0 --smeshing-opts-datadir /mnt/spacemesh/post_data --data-folder /mnt/spacemesh/node_data
 ```
 该命令会启动一个Spacemesh节点，并同时启动P盘，参数说明：
 - `--config`: 节点配置文件，通过`wget https://smapp.spacemesh.network/config.mainnet.json`获取；
+- `--smeshing-start`: 启动P盘，如果不加此选项，则只同步节点，不会启动P盘；
 - `--smeshing-coinbase`: 收益地址，`sm1`开头，通过`smcli`创建；
 - `--smeshing-opts-numunits`: P盘的单元数量，和下面postcli中的`-numUnits`必须相等；
+- `--smeshing-opts-provider`: 指定用显卡还是CPU，P盘时用显卡，参数值为显卡ID`0、1、2...`，扫盘时用CPU，参数值为`4294967295`；
 - `--smeshing-opts-datadir`: P盘文件存储路径；
 - `--data-folder`: 节点文件存储路径；
 
-本文主要介绍多台机器如何搭建集群P盘，如果只有一台机器(即单机solo模式)，上面的命令运行以后，就不用管了，等待P盘完成即可。
+本文主要介绍多台机器如何搭建集群P盘，如果只有一台机器(即单机solo模式)，上面的命令运行以后，等待P盘完成即可。
 
 如果要多台机器在同一个节点上同时P盘，启动上面的初始化命令等开始生成`.bin`文件后，就可以先退出了。因为我们要使用postcli来多台机器同时P盘，`go-spacemesh`只负责同步区块节点、扫盘及提交证明。
 
@@ -116,27 +118,28 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 
 - 机器1 (0 - 19)
 ```sh
-./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=0 -toFile=19 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=0 -toFile=19 -datadir=/mnt/spacemesh/post_data
 ```
 
 - 机器2 (20 - 39)
 ```sh
-./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=20 -toFile=39 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=20 -toFile=39 -datadir=/mnt/spacemesh/post_data
 ```
 
 - 机器3 (40 - 59)
 ```sh
-./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=40 -toFile=59 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=40 -toFile=59 -datadir=/mnt/spacemesh/post_data
 ```
 
 - 机器4 (60 - 79)
 ```sh
-./postcli -provider=0 -commitmentAtxId=9eebff023abb17ccb775c602daade8ed708f0a50d3149a42801184f5b74f2865 -id=[hex_decoded_id] -numUnits=5 -fromFile=60 -toFile=79 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=60 -toFile=79 -datadir=/mnt/spacemesh/post_data
 ```
+**⚠️ 注意将`[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32]`和`[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32]`替换为实际运行该命令的输出结果**。
 
 ### 2.5 启动P盘
 根据计算好的分段索引，在subset的每台机器上，按照分段索引启动，启动参数说明：
-- `-provider` 指定P盘的显卡ID，0、1、2，默认为0；
+- `-provider` 指定P盘的显卡ID，0、1、2，默认为0，如果有多张显卡，建议启动多个进程分别指定`-provider`；
 - `-commitmentAtxId` 提交PoET证明的地址，通过以下命令获取：  
   `cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32`
 
@@ -202,6 +205,8 @@ cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 3
 - Get NodeId
 ```sh
 cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32
+
+grpcurl -plaintext localhost:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32
 ```
 
 - 查看节点状态
@@ -229,6 +234,8 @@ RTX 2080Ti | 4G | 32分钟
 
 ### 4.3 用postcli已经P好的文件，可以移走吗？
 不要移走，会影响nonce的寻找，等一批跑完后方可移走。
+
+<!-- 一台p好的数据，怎么加载到新电脑上，还是那个账号 -->
 
 持续更新中...
 

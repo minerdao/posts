@@ -1,7 +1,7 @@
 ## 1. 存储测试工具
 使用fio对现有方式进行磁盘性能测试：
 ```
-sudo apt-get install fio  #安装fio
+sudo apt-get install -y fio
 sudo fio -filename=/nvme/1.txt -direct=1 -iodepth 1 -thread -rw=randwrite -ioengine=psync -bs=4k -size=100G -numjobs=50 -runtime=180 -group_reporting -name=rand_100write_4k 
  # /nvme/1.txt为挂载路径
  # 测试参数相同情况下需要iops达到100K以上
