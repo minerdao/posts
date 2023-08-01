@@ -150,9 +150,13 @@ Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile
 - `-datadir` P盘完成后的文件保存目录。
 
 ### 2.6 合并P盘文件
-等所有subset的机器P盘完成后，需要将每台机器上生成的文件，合并到运行`go-spacemesh`服务机器的`--smeshing-opts-datadir`路径下，然后重新启动`go-spacemesh`就可以开始扫盘并生成证明了。
+等所有subset的机器P盘完成后，需要将每台机器上生成的`.bin`文件，合并到运行`go-spacemesh`机器的`--smeshing-opts-datadir`路径下，然后重新启动`go-spacemesh`就可以开始扫盘并生成证明了。
 
-**注意**`.bin`文件合并后，需要在每个运行postcli机器的`postdata_metadata.json`文件里，找到一个全局最小的nonce，作为`go-spacemesh`的`--smeshing-opts-datadir`路径下`postdata_metadata.json`的nonce （有的postcli进程可能找不到nonce）。
+**注意**`.bin`文件合并完毕重启`go-spacemesh`之前，需要对比每个subset机器`postdata_metadata.json`文件里的`Nonce`值，找到最小的那个`Nonce`，替换掉go-spacemesh`--smeshing-opts-datadir/postdata_metadata.json`文件中的`Nonce` （有的subset进程可能找不到`Nonce`）。
+
+也就是说，合并后的 `postdata_metadata.json` 文件中的`Nonce`值，是所有subset机器 `postdata_metadata.json`里`Nonce`的最小值。
+
+据个人经验，一般subset第1个分段的`Nonce`值就是最小的那个。
 
 启动后如果文件完整，扫码文件时会输出类似下面的日志：
 
@@ -253,6 +257,7 @@ RTX 2080Ti | 4G | 32分钟
 - [显卡P盘脚本](https://github.com/spacemeshos/post/tree/develop/cmd/postcli)
 - [多显卡P盘教程](https://simeononsecurity.ch/other/efficient-spacemesh-mining-multiple-gpus-guide/#linux)
 - [多线程P盘脚本](https://github.com/fourierism/post)
+- [Protocol: Mining - Proof of Space-time](https://github.com/spacemeshos/protocol/blob/master/post.md)
 
 ## 6 加入社群
 MinerDAO社区聚集了Filecoin, Aleo, Spacemesh等当前热门挖矿项目的矿工、开发者、投资人。  
