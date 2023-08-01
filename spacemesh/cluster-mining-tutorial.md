@@ -104,10 +104,10 @@ SpaceMesh是以`numUnits`为基本的存储单元，每个`numUnits = 64GB`，P�
 ### 2.4 计算分段索引
 针对多台机器基于同一个NodeID P盘的情况，postcli提供了分段P盘`subset`功能，更多信息也可参照[postcli subset文档](https://github.com/spacemeshos/post/tree/develop/cmd/postcli#initializing-a-subset-of-post-data)。
 
-Subset是把要P的文件分段并分发给多台机器来跑，通过`-fromFile`，`-toFile`来设置开始及结束的文件索引。
+subset把要P的文件分段并分发给多台机器来完成，通过`-fromFile`，`-toFile`来指定开始及结束的文件索引。
 
 例如，上面的`-numUnits=5`总共需要生成80个.bin文件，如果平分给4台机器，则每台机器的`-fromFile`和`-toFile`分别为：
-机器| -fromFile | - toFile
+Subset| -fromFile | - toFile
 ------|-------:|------:
 机器1 | 0  | 19
 机器2 | 20 | 39
@@ -234,10 +234,10 @@ RTX 2080Ti | 4G | 32分钟
 欢迎大家持续补充其他显卡的速度。
 
 ### 4.2 多个Node能用一个`--smeshing-coinbase`钱包地址吗？
-可以的，只要是有效的钱包地址都可以。
+能。
 
 ### 4.3 用postcli已经P好的文件，可以移走吗？
-不要移走，会影响nonce的寻找，等一批跑完后方可移走。
+不要移走，会影响Nonce的寻找，等一批跑完后方可移走。
 
 <!-- 一台p好的数据，怎么加载到新电脑上，还是那个账号 -->
 
