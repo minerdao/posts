@@ -68,7 +68,7 @@ smcli也可以直接去官方下载编译好的：https://github.com/spacemeshos
 ```
 该命令会启动一个Spacemesh节点，并同时启动P盘，参数说明：
 - `--config`: 节点配置文件，通过`wget https://smapp.spacemesh.network/config.mainnet.json`获取；
-- `--smeshing-start`: 启动P盘，如果不加此选项，则只同步节点，不会启动P盘；
+- `--smeshing-start`: 启动P盘，如果不加此选项，则只同步节点，不会启动P盘，也不会生成`postdata_metadata.json`；
 - `--smeshing-coinbase`: 收益地址，`sm1`开头，通过`smcli`创建；
 - `--smeshing-opts-numunits`: P盘的单元数量，和下面postcli中的`-numUnits`必须相等；
 - `--smeshing-opts-provider`: 指定用显卡还是CPU，P盘时用显卡，参数值为显卡ID`0、1、2...`，扫盘时用CPU，参数值为`4294967295`；
@@ -118,32 +118,34 @@ Subset| -fromFile | - toFile
 
 - 机器1 (0 - 19)
 ```sh
-./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=0 -toFile=19 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=0 -toFile=19 -datadir=/mnt/spacemesh/post_data
 ```
 
 - 机器2 (20 - 39)
 ```sh
-./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=20 -toFile=39 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=20 -toFile=39 -datadir=/mnt/spacemesh/post_data
 ```
 
 - 机器3 (40 - 59)
 ```sh
-./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=40 -toFile=59 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=40 -toFile=59 -datadir=/mnt/spacemesh/post_data
 ```
 
 - 机器4 (60 - 79)
 ```sh
-./postcli -provider=0 -commitmentAtxId=[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=60 -toFile=79 -datadir=/mnt/spacemesh/post_data
+./postcli -provider=0 -commitmentAtxId=[./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32] -id=[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32] -numUnits=5 -fromFile=60 -toFile=79 -datadir=/mnt/spacemesh/post_data
 ```
-**⚠️ 注意将`[cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32]`和`[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32]`替换为实际运行该命令的输出结果**。
+**⚠️ 注意将`[./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32]`和`[cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32]`替换为实际运行该命令的输出结果**。
 
 ### 2.5 启动P盘
 根据计算好的分段索引，在subset的每台机器上，按照分段索引启动，启动参数说明：
 - `-provider` 指定P盘的显卡ID，0、1、2，默认为0，如果有多张显卡，建议启动多个进程分别指定`-provider`；
 - `-commitmentAtxId` 提交PoET证明的地址，通过以下命令获取：  
-  `cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32`
+  `./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32`
+  [grpcurl下载地址](https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_x86_64.tar.gz):
+  `wget -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_x86_64.tar.gz`
 
-- `-id` 节点ID(NodeID)，通过以下命令获取：  
+- `-id` 节点ID (NodeID)，通过以下命令获取：  
   `cat postdata_metadata.json | jq -r '.NodeId' |  base64 -d | xxd -p -c 32`
 
 - `-numUnits` P盘文件单元数，和节点初始化时候的`--smeshing-opts-numunits`保持一致；
@@ -203,7 +205,7 @@ Subset| -fromFile | - toFile
 
 - Get commitmentAtxId
 ```sh
-cat postdata_metadata.json | jq -r '.CommitmentAtxId' |  base64 -d | xxd -p -c 32
+./grpcurl -plaintext -d '' 127.0.0.1:9092 spacemesh.v1.ActivationService.Highest | jq -r '.atx.id.id' |  base64 -d | xxd -p -c 32
 ```
 
 - Get NodeId
